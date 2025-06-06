@@ -151,6 +151,7 @@ RUN \
   kubectl krew update && \
   mkdir -p ${KREW_ROOT}/bin && \
   true
+# disable because error messages in argo-cd
 #  helm-v3 plugin install https://github.com/jkroepke/helm-secrets --version ${HELM_SECRETS_VERSION} && \
 
 # array is exec form, string is shell form
