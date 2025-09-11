@@ -94,9 +94,9 @@ ARG SOPS_VERSION="v3.10.2"
 ARG YQ_VERSION="v4.45.4"
 
 # relevant for kubectl if installed
-ARG KUBESEAL_VERSION="0.29.0"
+ARG KUBESEAL_VERSION="0.30.0"
 # curl -v -L 'https://dl.k8s.io/release/stable.txt'
-ARG KUBECTL_VERSION="v1.31.1"
+ARG KUBECTL_VERSION="v1.32.5"
 # https://github.com/kubernetes-sigs/krew/releases/
 ARG KREW_VERSION="v0.4.5"
 
@@ -141,8 +141,11 @@ ENV KREW_ROOT=/home/argocd/krew
 ENV PATH="${KREW_ROOT}/bin:$PATH"
 
 # plugin versions
-ARG HELM_DIFF_VERSION="3.12.1"
+# https://github.com/databus23/helm-diff/releases
+ARG HELM_DIFF_VERSION="3.12.2"
+# https://github.com/aslafy-z/helm-git/releases
 ARG HELM_GIT_VERSION="1.4.0"
+# https://github.com/jkroepke/helm-secrets/releases
 ARG HELM_SECRETS_VERSION="4.6.5"
 
 RUN \
