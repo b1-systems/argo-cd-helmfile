@@ -9,6 +9,7 @@ ARG BASE_IMAGE=docker.io/library/ubuntu:24.04
 FROM $BASE_IMAGE
 
 LABEL org.opencontainers.image.source https://github.com/b1-systems/argo-cd-helmfile
+LABEL org.opencontainers.image.description "argocd-helmfile plugin to be used with argocd"
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV ARGOCD_USER_ID=999
