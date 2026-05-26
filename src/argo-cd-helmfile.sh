@@ -421,7 +421,7 @@ case $phase in
     if [ ! -z "${HELMFILE_PREGENERATE_SCRIPT_FILE}" ]; then
       echoerr "executint HELMFILE_PREGENERATE_SCRIPT:"
       HELMFILE_PREGENERATE_SCRIPT_FILE=$(realpath "${HELMFILE_PREGENERATE_SCRIPT_FILE}")
-      bash -x "${HELMFILE_PREGENERATE_SCRIPT_FILE}"
+      bash "${HELMFILE_PREGENERATE_SCRIPT_FILE}"
     fi
 
  # TODO: support post process pipeline here
