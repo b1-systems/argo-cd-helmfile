@@ -198,7 +198,9 @@ if [[ "${HELM_TEMPLATE_OPTIONS}" ]]; then
   HELM_TEMPLATE_OPTIONS=$(variable_expansion "${HELM_TEMPLATE_OPTIONS}")
 fi
 
+echoerr "looking for HELMFILE_INIT_SCRIPT:"
 if [[ "${HELMFILE_INIT_SCRIPT_FILE}" ]]; then
+  echoerr "INIT_SCRIPT: ${HELMFILE_INIT_SCRIPT_FILE}"
   HELMFILE_INIT_SCRIPT_FILE=$(variable_expansion "${HELMFILE_INIT_SCRIPT_FILE}")
 fi
 
@@ -353,8 +355,9 @@ case $phase in
     fi
 
     if [ ! -z "${HELMFILE_INIT_SCRIPT_FILE}" ]; then
+      echoerr "executint HELMFILE_INIT_SCRIPT:"
       HELMFILE_INIT_SCRIPT_FILE=$(realpath "${HELMFILE_INIT_SCRIPT_FILE}")
-      bash "${HELMFILE_INIT_SCRIPT_FILE}"
+      bash -x "${HELMFILE_INIT_SCRIPT_FILE}"
     fi
 
     # using app revision here to ensure if the git repo is updated the cache is busted
@@ -413,7 +416,7 @@ case $phase in
       done
       INTERNAL_HELM_TEMPLATE_OPTIONS="${INTERNAL_HELM_TEMPLATE_OPTIONS} ${INTERNAL_HELM_API_VERSIONS}"
     fi
-
+    # do sops encryption here
     # TODO: support post process pipeline here
     ${helmfile} \
       template \
