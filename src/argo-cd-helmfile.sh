@@ -198,10 +198,13 @@ if [[ "${HELM_TEMPLATE_OPTIONS}" ]]; then
   HELM_TEMPLATE_OPTIONS=$(variable_expansion "${HELM_TEMPLATE_OPTIONS}")
 fi
 
-echoerr "looking for HELMFILE_INIT_SCRIPT:"
 if [[ "${HELMFILE_INIT_SCRIPT_FILE}" ]]; then
   echoerr "INIT_SCRIPT: ${HELMFILE_INIT_SCRIPT_FILE}"
   HELMFILE_INIT_SCRIPT_FILE=$(variable_expansion "${HELMFILE_INIT_SCRIPT_FILE}")
+fi
+
+if [[ "${HELMFILE_PREGENERATE_SCRIPT_FILE}" ]]; then
+  HELMFILE_PREGENERATE_SCRIPT_FILE=$(variable_expansion "${HELMFILE_PREGENERATE_SCRIPT_FILE}")
 fi
 
 : "${HELMFILE_ENV_FILE:=".argo-cd-helmfile-env"}"
