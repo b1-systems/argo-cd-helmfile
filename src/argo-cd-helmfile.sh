@@ -417,7 +417,13 @@ case $phase in
       INTERNAL_HELM_TEMPLATE_OPTIONS="${INTERNAL_HELM_TEMPLATE_OPTIONS} ${INTERNAL_HELM_API_VERSIONS}"
     fi
     # do sops encryption here
-    # TODO: support post process pipeline here
+    if [ ! -z "${HELMFILE_PREGENERATE_SCRIPT_FILE}" ]; then
+      echoerr "executint HELMFILE_PREGENERATE_SCRIPT:"
+      HELMFILE_PREGENERATE_SCRIPT_FILE=$(realpath "${HELMFILE_PREGENERATE_SCRIPT_FILE}")
+      bash -x "${HELMFILE_PREGENERATE_SCRIPT_FILE}"
+    fi
+
+ # TODO: support post process pipeline here
     ${helmfile} \
       template \
       --skip-deps ${INTERNAL_HELMFILE_TEMPLATE_OPTIONS} \
@@ -529,7 +535,12 @@ case $phase in
     "title": "HELMFILE_USE_CONTEXT_NAMESPACE",
     "tooltip": "do not set helmfile namespace to ARGOCD_APP_NAMESPACE (for multi-namespace apps)",
     "itemType": "boolean"
-  }
+  },
+  {
+    "name": "HELMFILE_PREGENERATE_SCRIPT_FILE",
+    "title": "HELMFILE_PREGENERATE_SCRIPT_FILE",
+    "tooltip": "path to script to execute at start at generate phase"
+  },
 ]
 EOF
 
