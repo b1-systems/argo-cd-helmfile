@@ -357,7 +357,7 @@ case $phase in
     if [ ! -z "${HELMFILE_INIT_SCRIPT_FILE}" ]; then
       echoerr "executint HELMFILE_INIT_SCRIPT:"
       HELMFILE_INIT_SCRIPT_FILE=$(realpath "${HELMFILE_INIT_SCRIPT_FILE}")
-      bash -x "${HELMFILE_INIT_SCRIPT_FILE}"
+      bash "${HELMFILE_INIT_SCRIPT_FILE}"
     fi
 
     # using app revision here to ensure if the git repo is updated the cache is busted
@@ -421,7 +421,7 @@ case $phase in
     if [ ! -z "${HELMFILE_PREGENERATE_SCRIPT_FILE}" ]; then
       echoerr "executint HELMFILE_PREGENERATE_SCRIPT:"
       HELMFILE_PREGENERATE_SCRIPT_FILE=$(realpath "${HELMFILE_PREGENERATE_SCRIPT_FILE}")
-      bash "${HELMFILE_PREGENERATE_SCRIPT_FILE}"
+      bash "${HELMFILE_PREGENERATE_SCRIPT_FILE}" >&2
     fi
 
  # TODO: support post process pipeline here
