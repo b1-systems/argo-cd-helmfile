@@ -356,6 +356,9 @@ case $phase in
       HELMFILE_INIT_SCRIPT_FILE=$(realpath "${HELMFILE_INIT_SCRIPT_FILE}")
       bash "${HELMFILE_INIT_SCRIPT_FILE}"
     fi
+    if [[ "${HELMFILE_ENV_FILE}" ]]; then
+      HELMFILE_ENV_FILE=$(variable_expansion "${HELMFILE_ENV_FILE}")
+    fi
 
     # using app revision here to ensure if the git repo is updated the cache is busted
     cache_key="plugin-${phase}-repos-${ARGOCD_APP_REVISION}"
